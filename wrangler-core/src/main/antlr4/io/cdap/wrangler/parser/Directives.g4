@@ -140,16 +140,8 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool | byteSizeArg | timeDurationArg
- ;
-
-byteSizeArg
- : BYTE_SIZE
- ;
-
-timeDurationArg
- : TIME_DURATION
- ;
+    : BYTE_SIZE | TIME_DURATION | NUMBER | TEXT
+    ;
 
 ecommand
  : '!' Identifier
@@ -255,7 +247,6 @@ BackSlash: '\\';
 Dollar   : '$';
 Tilde    : '~';
 
-
 Bool
  : 'true'
  | 'false'
@@ -320,8 +311,11 @@ fragment Digit
  : [0-9]
  ;
 
-BYTE_SIZE: [0-9]+(.[0-9]+)?BYTE_UNIT;
-TIME_DURATION: [0-9]+(.[0-9]+)?TIME_UNIT;
+BYTE_SIZE: [0-9]+ ('.' [0-9]+)? BYTE_UNIT;
+TIME_DURATION: [0-9]+ ('.' [0-9]+)? TIME_UNIT;
 
-fragment BYTE_UNIT: 'B' | 'KB' | 'MB' | 'GB' | 'TB';
-fragment TIME_UNIT: 'ns' | 'ms' | 's' | 'm' | 'h';
+fragment BYTE_UNIT: ('B' | 'KB' | 'MB' | 'GB' | 'TB');
+fragment TIME_UNIT: ('ms' | 's' | 'min' | 'h');
+
+byteSizeValue: BYTE_SIZE;
+timeDurationValue: TIME_DURATION;

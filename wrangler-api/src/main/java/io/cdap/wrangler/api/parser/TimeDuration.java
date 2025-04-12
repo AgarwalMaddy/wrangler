@@ -20,12 +20,26 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
- * Token representing a Time Duration value (e.g., "500ms", "2s").
+ * A token that represents a time duration value (e.g., "100ms", "2.5s").
+ * This class parses time duration strings and converts them to a canonical value in milliseconds.
+ * Supported units:
+ * - ms (milliseconds)
+ * - s (seconds, 1000 milliseconds)
+ * - m (minutes, 60 * 1000 milliseconds)
+ * - h (hours, 60 * 60 * 1000 milliseconds)
  */
 public class TimeDuration implements Token {
     private final String original;
     private final long milliseconds;
 
+    /**
+     * Creates a new TimeDuration instance by parsing the given string.
+     * The string should be in the format "number[unit]" where unit is one of ms, s, m, or h.
+     * The number can be an integer or a decimal.
+     *
+     * @param value the string to parse (e.g., "100ms", "2.5s")
+     * @throws IllegalArgumentException if the string cannot be parsed
+     */
     public TimeDuration(String value) {
         this.original = value;
         this.milliseconds = parseMilliseconds(value);
@@ -51,6 +65,11 @@ public class TimeDuration implements Token {
         throw new IllegalArgumentException("Invalid time duration unit: " + value);
     }
 
+    /**
+     * Returns the duration in milliseconds.
+     *
+     * @return the duration in milliseconds
+     */
     public long getMilliseconds() {
         return milliseconds;
     }

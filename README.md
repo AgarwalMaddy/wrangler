@@ -22,6 +22,22 @@ are manually created.
 
 More [here](wrangler-docs/upcoming-features.md) on upcoming features.
 
+  * **Byte Size and Time Duration Units Parsers** provide native support for parsing and utilizing byte size and time duration units within recipes. This enhancement allows users to easily handle units like Kilobytes (KB), Megabytes (MB), milliseconds (ms), or seconds (s) without complex multi-step recipes.
+    * **Byte Size Parser**: Parses byte size values with units (B, KB, MB, GB, TB)
+      * Example: "10KB", "1.5MB", "2GB"
+      * Provides methods to retrieve values in canonical units (bytes)
+    * **Time Duration Parser**: Parses time duration values with units (ms, s, m, h)
+      * Example: "500ms", "2s", "1.5m", "0.5h"
+      * Provides methods to retrieve values in canonical units (milliseconds)
+    * **Aggregate Stats Directive**: A new directive that utilizes these parsers to aggregate statistics
+      * Usage: `aggregate-stats :size_column :time_column :total_size_column :total_time_column`
+      * Aggregates byte sizes and time durations from multiple rows
+      * Outputs total size in MB and total time in seconds
+      * Example:
+        ```
+        aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
+        ```
+
   * **User Defined Directives, also known as UDD**, allow you to create custom functions to transform records within CDAP DataPrep or a.k.a Wrangler. CDAP comes with a comprehensive library of functions. There are however some omissions, and some specific cases for which UDDs are the solution. Additional information on how you can build your custom directives [here](wrangler-docs/custom-directive.md).
     * Migrating directives from version 1.0 to version 2.0 [here](wrangler-docs/directive-migration.md)
     * Information about Grammar [here](wrangler-docs/grammar/grammar-info.md)
@@ -121,7 +137,9 @@ These directives are currently available:
 | [Datetime To Timestamp](wrangler-docs/directives/datetime-to-timestamp.md)      | Converts a datetime value to timestamp with the given zone       |
 | [Format Datetime](wrangler-docs/directives/format-datetime.md)                  | Formats a datetime value to custom date time pattern strings     |
 | [Timestamp To Datetime](wrangler-docs/directives/timestamp-to-datetime.md)      | Converts a timestamp value to datetime                           |
-| **Lookups**                                                            |                                                                  |
+| **Aggregations**                                                               |                                                                  |
+| [Aggregate Stats](wrangler-docs/directives/aggregate-stats.md)                 | Aggregates byte sizes and time durations from multiple rows      |
+| **Lookups**                                                                    |                                                                  |
 | [Catalog Lookup](wrangler-docs/directives/catalog-lookup.md)                    | Static catalog lookup of ICD-9, ICD-10-2016, ICD-10-2017 codes   |
 | [Table Lookup](wrangler-docs/directives/table-lookup.md)                        | Performs lookups into Table datasets                             |
 | **Hashing & Masking**                                                  |                                                                  |

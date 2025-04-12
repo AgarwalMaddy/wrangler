@@ -1,0 +1,31 @@
+# AI Tool Usage for Wrangler Enhancement Project
+
+This file documents the prompts used with AI tools during the development of the Byte Size and Time Duration Units Parsers enhancement for the CDAP Wrangler library.
+
+## Initial Setup and Planning
+1. "Please help me enhance the Wrangler library with Byte Size and Time Duration Units Parsers according to the assignment requirements."
+2. "How should we structure the implementation of ByteSize and TimeDuration classes?"
+3. "What modifications are needed in the grammar file to support the new tokens?"
+
+## Implementation Phase
+4. "Help me implement the ByteSize class with proper parsing and unit conversion."
+5. "Help me implement the TimeDuration class with proper parsing and unit conversion."
+6. "How should we implement the AggregateStatsDirective to use these new parsers?"
+7. "What test cases should we create to verify the functionality?"
+
+## Documentation and Testing
+8. "Help me add comprehensive documentation for the new features in README.md."
+9. "What additional test cases should we add for edge cases?"
+10. "How should we document the usage of the new aggregate-stats directive?"
+
+## Code Review and Refinement
+11. "Please review the implementation and suggest improvements."
+12. "Help me add proper error handling to the AggregateStatsDirective."
+13. "What additional documentation or test cases are needed?"
+
+## Results and Achievements
+- Successfully implemented ByteSize and TimeDuration parsers
+- Added comprehensive unit tests
+- Created documentation for new features
+- Implemented AggregateStatsDirective with proper error handling
+- Added test cases for edge cases and different unit combinations 

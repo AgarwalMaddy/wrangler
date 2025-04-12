@@ -20,12 +20,27 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
- * Token representing a Byte Size value (e.g., "10KB", "1.5MB").
+ * A token that represents a byte size value (e.g., "10KB", "1.5MB").
+ * This class parses byte size strings and converts them to a canonical value in bytes.
+ * Supported units:
+ * - B (bytes)
+ * - KB (kilobytes, 1024 bytes)
+ * - MB (megabytes, 1024 * 1024 bytes)
+ * - GB (gigabytes, 1024 * 1024 * 1024 bytes)
+ * - TB (terabytes, 1024 * 1024 * 1024 * 1024 bytes)
  */
 public class ByteSize implements Token {
     private final String original;
     private final long bytes;
 
+    /**
+     * Creates a new ByteSize instance by parsing the given string.
+     * The string should be in the format "number[unit]" where unit is one of B, KB, MB, GB, or TB.
+     * The number can be an integer or a decimal.
+     *
+     * @param value the string to parse (e.g., "10KB", "1.5MB")
+     * @throws IllegalArgumentException if the string cannot be parsed
+     */
     public ByteSize(String value) {
         this.original = value;
         this.bytes = parseBytes(value);
@@ -53,6 +68,11 @@ public class ByteSize implements Token {
         throw new IllegalArgumentException("Invalid byte size unit: " + value);
     }
 
+    /**
+     * Returns the size in bytes.
+     *
+     * @return the size in bytes
+     */
     public long getBytes() {
         return bytes;
     }
